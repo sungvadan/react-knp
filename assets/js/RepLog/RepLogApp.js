@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RepLogList from './RepLogList'
 
 export default class RepLogApp extends Component
 {
@@ -16,11 +17,6 @@ export default class RepLogApp extends Component
     if (this.props.withHeart) {
       heart = <span>Love</span>;
     }
-    const  repLogs = [
-      { id: 1, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
-      { id: 2, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
-      { id: 3, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
-    ];
 
     return (
       <div className="col-md-7">
@@ -37,20 +33,7 @@ export default class RepLogApp extends Component
             <th>&nbsp;</th>
           </tr>
           </thead>
-          <tbody>
-          {repLogs.map((repLog) => (
-            <tr
-              key={repLog.id}
-              className={highlightedRowId === repLog.id ? 'info' : ''}
-              onClick={() => this.setState({highlightedRowId: repLog.id})}
-            >
-              <td>{repLog.itemLabel}</td>
-              <td>{repLog.reps}</td>
-              <td>{repLog.totalWeightLifted}</td>
-              <td>...</td>
-            </tr>
-          ))}
-          </tbody>
+          <RepLogList highlightedRowId={highlightedRowId}/>
           <tfoot>
           <tr>
             <td>&nbsp;</td>
