@@ -7,8 +7,50 @@ export default class RepLogApp extends Component
     if (this.props.withHeart) {
       heart = <span>Love</span>;
     }
-    return (
-        <h2>Lift stuff {heart}</h2>
+    const  repLogs = [
+      { id: 1, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
+      { id: 2, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
+      { id: 3, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
+    ];
+
+    const repLogElement = repLogs.map((repLog) => {
+      return (
+        <tr>
+          <td>{repLog.itemLabel}</td>
+          <td>{repLog.reps}</td>
+          <td>{repLog.totalWeightLifted}</td>
+          <td>...</td>
+        </tr>
       )
+    });
+    return (
+      <div className="col-md-7">
+        <h2>
+          Lift History
+        </h2>
+
+        <table className="table table-striped">
+          <thead>
+          <tr>
+            <th>What</th>
+            <th>How many times?</th>
+            <th>Weight</th>
+            <th>&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          {repLogElement}
+          </tbody>
+          <tfoot>
+          <tr>
+            <td>&nbsp;</td>
+            <th>Total</th>
+            <th>TODO</th>
+            <td>&nbsp;</td>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    )
   }
 }
