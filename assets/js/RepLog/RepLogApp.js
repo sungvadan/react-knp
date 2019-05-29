@@ -13,16 +13,6 @@ export default class RepLogApp extends Component
       { id: 3, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
     ];
 
-    const repLogElement = repLogs.map((repLog) => {
-      return (
-        <tr>
-          <td>{repLog.itemLabel}</td>
-          <td>{repLog.reps}</td>
-          <td>{repLog.totalWeightLifted}</td>
-          <td>...</td>
-        </tr>
-      )
-    });
     return (
       <div className="col-md-7">
         <h2>
@@ -39,7 +29,14 @@ export default class RepLogApp extends Component
           </tr>
           </thead>
           <tbody>
-          {repLogElement}
+          {repLogs.map((repLog) => (
+            <tr key={repLog.id}>
+              <td>{repLog.itemLabel}</td>
+              <td>{repLog.reps}</td>
+              <td>{repLog.totalWeightLifted}</td>
+              <td>...</td>
+            </tr>
+          ))}
           </tbody>
           <tfoot>
           <tr>
