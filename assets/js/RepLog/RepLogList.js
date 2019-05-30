@@ -8,7 +8,7 @@ export default class RepLogList extends Component{
       { id: 2, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
       { id: 3, reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
     ];
-    const {highlightedRowId} = this.props;
+    const {highlightedRowId, onRowClick} = this.props;
 
     return (
       <tbody>
@@ -16,7 +16,7 @@ export default class RepLogList extends Component{
         <tr
           key={repLog.id}
           className={highlightedRowId === repLog.id ? 'info' : ''}
-          onClick={() => this.setState({highlightedRowId: repLog.id})}
+          onClick={()=>onRowClick(repLog.id)}
         >
           <td>{repLog.itemLabel}</td>
           <td>{repLog.reps}</td>
