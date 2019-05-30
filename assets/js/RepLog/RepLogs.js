@@ -2,9 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import RepLogList from "./RepLogList";
 
+function calculTotalWeightLifted(repLogs) {
+  let totalWeight = 0;
+
+  for (let repLog of repLogs) {
+    totalWeight += repLog.totalWeightLifted
+  }
+
+  return totalWeight;
+}
+
+const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, repLog) => total + repLog.totalWeightLifted, 0);
+
 export default function RepLogs(props){
 
-  const { withHeart, highlightedRowId, onRowClick } = props;
+  const { withHeart, highlightedRowId, repLogs, onRowClick } = props;
 
   let heart = '';
   if (withHeart) {
@@ -28,13 +40,14 @@ export default function RepLogs(props){
         </thead>
         <RepLogList
           highlightedRowId={highlightedRowId}
+          repLogs={repLogs}
           onRowClick={onRowClick}
         />
         <tfoot>
         <tr>
           <td>&nbsp;</td>
           <th>Total</th>
-          <th>TODO</th>
+          <th>{calculateTotalWeightLifted(repLogs)}</th>
           <td>&nbsp;</td>
         </tr>
         </tfoot>
@@ -77,5 +90,6 @@ export default function RepLogs(props){
 RepLogs.propTypes = {
   withHeart: PropTypes.bool,
   highlightedRowId: PropTypes.any,
+  repLogs: PropTypes.array,
   onRowClick: PropTypes.func.isRequired
 }
