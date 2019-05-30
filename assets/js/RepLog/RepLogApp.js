@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import RepLogs from './RepLogs'
 
 export default class RepLogApp extends Component
@@ -18,7 +19,7 @@ export default class RepLogApp extends Component
 
   render() {
     const { highlightedRowId } = this.state;
-    const { withHeart } = this.state
+    const { withHeart } = this.props
     return(
       <RepLogs
         withHeart={withHeart}
@@ -28,4 +29,8 @@ export default class RepLogApp extends Component
     )
 
   }
+}
+
+RepLogApp.propTypes = {
+  withHeart: PropTypes.bool
 }

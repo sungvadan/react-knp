@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import RepLogList from "./RepLogList";
 
 export default function RepLogs(props){
@@ -13,7 +14,7 @@ export default function RepLogs(props){
   return (
     <div className="col-md-7">
       <h2>
-        Lift History
+        Lift History {heart}
       </h2>
 
       <table className="table table-striped">
@@ -71,4 +72,10 @@ export default function RepLogs(props){
 
     </div>
   )
+}
+
+RepLogs.propTypes = {
+  withHeart: PropTypes.bool,
+  highlightedRowId: PropTypes.any,
+  onRowClick: PropTypes.func.isRequired
 }
