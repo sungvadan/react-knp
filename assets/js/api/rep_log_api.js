@@ -1,6 +1,8 @@
 export function getRepLogs() {
-  return fetch('/reps')
+  return fetch('/reps',{
+    credentials: 'same-origin'
+  })
     .then(reponse => {
-      return reponse.json();
+      return reponse.json().then((data)=>data.items);
     })
 }

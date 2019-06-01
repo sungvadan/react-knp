@@ -9,17 +9,9 @@ export default class RepLogApp extends Component
   constructor(props) {
     super(props);
 
-    getRepLogs()
-      .then((data)=> {
-        console.log(data)
-      })
     this.state = {
       highlightedRowId: null,
-      repLogs: [
-        { id: uuid(), reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
-        { id: uuid(), reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
-        { id: uuid(), reps: 25, itemLabel: 'My Laptop', totalWeightLifted: 120 },
-      ],
+      repLogs: [],
       numberOfHearts: 1
     };
 
@@ -27,6 +19,15 @@ export default class RepLogApp extends Component
     this.handleNewItemSubmit = this.handleNewItemSubmit.bind(this);
     this.handleHeartChange = this.handleHeartChange.bind(this);
     this.handleDeleteRepLog = this.handleDeleteRepLog.bind(this);
+  }
+
+  componentDidMount() {
+    getRepLogs()
+      .then((data)=> {
+        this.setState({
+          repLogs: data
+        })
+      })
   }
 
   handleHeartChange(numberOfHearts) {
