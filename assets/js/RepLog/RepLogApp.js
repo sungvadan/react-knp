@@ -21,6 +21,7 @@ export default class RepLogApp extends Component
     this.handleRowClick = this.handleRowClick.bind(this);
     this.handleNewItemSubmit = this.handleNewItemSubmit.bind(this);
     this.handleHeartChange = this.handleHeartChange.bind(this);
+    this.handleDeleteRepLog = this.handleDeleteRepLog.bind(this);
   }
 
   handleHeartChange(numberOfHearts) {
@@ -49,6 +50,16 @@ export default class RepLogApp extends Component
     })
   }
 
+  handleDeleteRepLog(id) {
+    // remove the repo log without mutating state
+    // filter returns a new array
+    this.setState(prevState => {
+      return {
+        repLogs: prevState.repLogs.filter(repLog => repLog.id !== id)
+      }
+    });
+  }
+
   render() {
     return(
       <RepLogs
@@ -57,6 +68,7 @@ export default class RepLogApp extends Component
         onRowClick={this.handleRowClick}
         onNewItemSubmit={this.handleNewItemSubmit}
         onHeartChange={this.handleHeartChange}
+        onDeleteRepLog={this.handleDeleteRepLog}
       />
     )
 
