@@ -27,16 +27,18 @@ export default class RepLogApp extends Component
 
   handleNewItemSubmit(itemLabel, reps) {
 
-    const repLogs = this.state.repLogs;
     const newReps = {
       id: uuid(),
       reps: reps,
       itemLabel: itemLabel,
       totalWeightLifted: 156
     }
-    repLogs.push(newReps);
-    this.setState({repLogs: repLogs })
 
+    this.setState(prevState => {
+      const repLogs = [...prevState.repLogs, newReps];
+
+      return {repLogs: repLogs }
+    })
   }
 
   render() {
