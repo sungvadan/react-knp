@@ -17,11 +17,11 @@ const calculateTotalWeightLifted = repLogs => repLogs.reduce((total, repLog) => 
 
 export default function RepLogs(props){
 
-  const { withHeart, highlightedRowId, repLogs, onRowClick, onNewItemSubmit } = props;
+  const { withHeart, highlightedRowId, repLogs, onRowClick, onNewItemSubmit, numberOfHearts, onHeartChange } = props;
 
   let heart = '';
   if (withHeart) {
-    heart = <span>Love</span>;
+    heart = <span>{'<3'.repeat(numberOfHearts)}</span>;
   }
 
   return (
@@ -30,6 +30,13 @@ export default function RepLogs(props){
         Lift History {heart}
       </h2>
 
+      <input
+        type="range"
+        value={numberOfHearts}
+        onChange={(e) => {
+          onHeartChange(+e.target.value)
+        }}
+      />
       <table className="table table-striped">
         <thead>
         <tr>
@@ -65,8 +72,10 @@ export default function RepLogs(props){
 
 RepLogs.propTypes = {
   withHeart: PropTypes.bool,
+  numberOfHearts: PropTypes.number.isRequired,
   highlightedRowId: PropTypes.any,
   repLogs: PropTypes.array,
   onRowClick: PropTypes.func.isRequired,
-  onNewItemSubmit: PropTypes.func.isRequired
+  onNewItemSubmit: PropTypes.func.isRequired,
+  onHeartChange: PropTypes.func.isRequired
 }
