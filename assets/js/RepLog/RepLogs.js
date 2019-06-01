@@ -53,8 +53,12 @@ export default function RepLogs(props){
         </tr>
         </tfoot>
       </table>
-      <RepLogCreator onNewItemSubmit={onNewItemSubmit}/>
 
+      <div className="row">
+        <div className="col_md-6">
+          <RepLogCreator onNewItemSubmit={onNewItemSubmit}/>
+        </div>
+      </div>
     </div>
   )
 }
