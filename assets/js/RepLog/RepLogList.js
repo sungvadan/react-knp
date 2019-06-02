@@ -3,11 +3,21 @@ import PropTypes from 'prop-types'
 
 export default function RepLogList(props){
 
-  const {highlightedRowId, repLogs, onRowClick, onDeleteRepLog} = props;
+  const {highlightedRowId, repLogs, onRowClick, onDeleteRepLog, isLoaded} = props;
 
   const handleDeleteClick = (event, repLogId) => {
     event.preventDefault();
     onDeleteRepLog(repLogId);
+  }
+
+  if (!isLoaded) {
+    return (
+      <tbody>
+        <tr>
+          <td colSpan="4" className="text-center">Loading...</td>
+        </tr>
+      </tbody>
+    );
   }
 
   return (
@@ -36,5 +46,6 @@ RepLogList.propTypes = {
   highlightedRowId: PropTypes.any,
   repLogs: PropTypes.array,
   onRowClick: PropTypes.func.isRequired,
-  onDeleteRepLog: PropTypes.func.isRequired
+  onDeleteRepLog: PropTypes.func.isRequired,
+  isLoaded: PropTypes.bool
 };
