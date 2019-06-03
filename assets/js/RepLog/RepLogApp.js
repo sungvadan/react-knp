@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import uuid from 'uuid/v4'
 import RepLogs from './RepLogs'
 import {getRepLogs , deleteRepLog, createRepLog } from '../api/rep_log_api'
 
@@ -14,12 +13,17 @@ export default class RepLogApp extends Component
       repLogs: [],
       numberOfHearts: 1,
       idLoaded: false,
+      isSavingNewRepLog: false,
+      successMessage: ''
     };
+
+    this.successMessageTimeoutHandle = 0;
 
     this.handleRowClick = this.handleRowClick.bind(this);
     this.handleNewItemSubmit = this.handleNewItemSubmit.bind(this);
     this.handleHeartChange = this.handleHeartChange.bind(this);
     this.handleDeleteRepLog = this.handleDeleteRepLog.bind(this);
+    this.setSuccessMessage = this.setSuccessMessage.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +34,10 @@ export default class RepLogApp extends Component
           isLoaded: true,
         })
       })
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.successMessageTimeoutHandle);
   }
 
   handleHeartChange(numberOfHearts) {
@@ -47,19 +55,51 @@ export default class RepLogApp extends Component
     const newReps = {
       reps: reps,
       item: item,
-    }
+    };
+
+    this.setState({
+      isSavingNewRepLog: true
+    });
 
     createRepLog(newReps)
       .then(repLog => {
         this.setState(prevState => {
           const repLogs = [...prevState.repLogs, repLog];
 
-          return {repLogs: repLogs }
+          return {
+            repLogs: repLogs,
+            isSavingNewRepLog: false,
+          }
         })
+        this.setSuccessMessage('Rep log Saved!');
       });
   }
 
+  setSuccessMessage(message) {
+    this.setState({
+      successMessage: message
+    });
+
+    clearTimeout(this.successMessageTimeoutHandle);
+
+    this.successMessageTimeoutHandle = setTimeout(() => {
+      this.setState({
+        successMessage: ''
+      });
+      this.successMessageTimeoutHandle = 0;
+    }, 3000)
+  }
   handleDeleteRepLog(id) {
+    this.setState((prevState) => {
+      return {
+        repLogs: prevState.repLogs.map(repLog => {
+          if (repLog.id !== id) {
+            return repLog;
+          }
+          return Object.assign({}, repLog, {isDeleting: true})
+        })
+      }
+    })
     deleteRepLog(id);
     // remove the repo log without mutating state
     // filter returns a new array
@@ -68,6 +108,7 @@ export default class RepLogApp extends Component
         repLogs: prevState.repLogs.filter(repLog => repLog.id !== id)
       }
     });
+    this.setSuccessMessage('Rep log removed!');
   }
 
   render() {

@@ -3,7 +3,15 @@ import PropTypes from 'prop-types'
 
 export default function RepLogList(props){
 
-  const {highlightedRowId, repLogs, onRowClick, onDeleteRepLog, isLoaded} = props;
+  const {
+    highlightedRowId,
+    repLogs,
+    onRowClick,
+    onDeleteRepLog,
+    isLoaded,
+    isSavingNewRepLog,
+    successMessage
+  } = props;
 
   const handleDeleteClick = (event, repLogId) => {
     event.preventDefault();
@@ -22,11 +30,22 @@ export default function RepLogList(props){
 
   return (
     <tbody>
+    {successMessage && (
+      <tr>
+        <td
+          colSpan='4'
+          className='text-center alert alert-success'
+        >{successMessage}</td>
+      </tr>
+    )}
     {repLogs.map((repLog) => (
       <tr
         key={repLog.id}
         className={highlightedRowId === repLog.id ? 'info' : ''}
         onClick={()=>onRowClick(repLog.id)}
+        style={{
+          opacity: repLog.isDeleting? .3 : 1
+        }}
       >
         <td>{repLog.itemLabel}</td>
         <td>{repLog.reps}</td>
@@ -38,6 +57,17 @@ export default function RepLogList(props){
         </td>
       </tr>
     ))}
+    {isSavingNewRepLog && (
+      <tr>
+        <td
+          colSpan='4'
+          className='text-center'
+          style={{
+            opacity: 0.5
+          }}
+        >Lifting to the database ...</td>
+      </tr>
+    )}
     </tbody>
   )
 }
@@ -47,5 +77,7 @@ RepLogList.propTypes = {
   repLogs: PropTypes.array,
   onRowClick: PropTypes.func.isRequired,
   onDeleteRepLog: PropTypes.func.isRequired,
-  isLoaded: PropTypes.bool
+  isLoaded: PropTypes.bool,
+  isSavingNewRepLog: PropTypes.bool,
+  successMessage: PropTypes.string,
 };
