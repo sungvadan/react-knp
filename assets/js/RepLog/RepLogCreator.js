@@ -39,7 +39,7 @@ export default class RepLogCreator extends Component{
     }
 
     onNewItemSubmit(
-      itemSelect.options[itemSelect.selectedIndex].text,
+      itemSelect.options[itemSelect.selectedIndex].value,
       quantityInput.value
     );
 
