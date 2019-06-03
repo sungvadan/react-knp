@@ -20,16 +20,17 @@ export default function RepLogs(props){
 
   const {
     withHeart,
-   highlightedRowId,
-   repLogs,
-   onRowClick,
-   onNewItemSubmit,
-   numberOfHearts,
-   onHeartChange,
-   onDeleteRepLog,
-   isLoaded,
-   isSavingNewRepLog,
+    highlightedRowId,
+    repLogs,
+    onRowClick,
+    onNewItemSubmit,
+    numberOfHearts,
+    onHeartChange,
+    onDeleteRepLog,
+    isLoaded,
+    isSavingNewRepLog,
     successMessage,
+    newRepLogValidationErrorMessage,
   } = props;
 
   let heart = '';
@@ -80,7 +81,10 @@ export default function RepLogs(props){
 
       <div className="row">
         <div className="col_md-6">
-          <RepLogCreator onNewItemSubmit={onNewItemSubmit}/>
+          <RepLogCreator
+            onNewItemSubmit={onNewItemSubmit}
+            newRepLogValidationErrorMessage={newRepLogValidationErrorMessage}
+          />
         </div>
       </div>
     </div>
@@ -98,5 +102,6 @@ RepLogs.propTypes = {
   onDeleteRepLog: PropTypes.func.isRequired,
   isLoaded: PropTypes.bool,
   isSavingNewRepLog: PropTypes.bool,
-  successMessage: PropTypes.string
+  successMessage: PropTypes.string,
+  newRepLogValidationErrorMessage: PropTypes.string,
 }

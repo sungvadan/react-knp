@@ -14,7 +14,8 @@ export default class RepLogApp extends Component
       numberOfHearts: 1,
       idLoaded: false,
       isSavingNewRepLog: false,
-      successMessage: ''
+      successMessage: '',
+      newRepLogValidationErrorMessage: ''
     };
 
     this.successMessageTimeoutHandle = 0;
@@ -69,9 +70,20 @@ export default class RepLogApp extends Component
           return {
             repLogs: repLogs,
             isSavingNewRepLog: false,
+            newRepLogValidationErrorMessage: '',
           }
         })
         this.setSuccessMessage('Rep log Saved!');
+      })
+      .catch(error => {
+        error.response.json().then(errorData => {
+          const errors = errorData.errors;
+          const firstError = errors[Object.keys(errors)[0]];
+
+          this.setState({
+            newRepLogValidationErrorMessage: firstError
+          })
+        })
       });
   }
 
