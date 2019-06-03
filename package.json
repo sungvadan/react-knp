@@ -22,5 +22,8 @@
     "dev": "encore dev",
     "watch": "encore dev --watch",
     "build": "encore production"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4"
   }
 }

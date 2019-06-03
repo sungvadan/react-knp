@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add props-type --dev
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add babel-plugin-proposal-object-rest-spread --dev
 
 PATH: 
   /opt/DataGrip-2018.3.3/bin:/home/vtp/.symfony/bin:/home/vtp/workspace/React-knp/node_modules/.bin:/home/vtp/.tfenv/bin:/home/vtp/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/props-type: Not found
+  Error: https://registry.yarnpkg.com/babel-plugin-proposal-object-rest-spread: Not found
       at Request.params.callback [as _callback] (/usr/share/yarn/lib/cli.js:66091:18)
       at Request.self.callback (/usr/share/yarn/lib/cli.js:129590:22)
       at Request.emit (events.js:189:13)
@@ -38,10 +38,12 @@ npm manifest:
       "font-awesome": "4",
       "jquery": "^3.3.1",
       "node-sass": "^4.7.2",
+      "prop-types": "^15.7.2",
       "react": "^16.8.6",
       "react-dom": "^16.8.6",
       "sass-loader": "^6.0.6",
       "sweetalert2": "^7.11.0",
+      "uuid": "^3.3.2",
       "webpack-notifier": "^1.5.1"
     },
     "scripts": {
@@ -6341,6 +6343,11 @@ Lockfile:
   uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
     version "3.2.1"
     resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
+  
+  uuid@^3.3.2:
+    version "3.3.2"
+    resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+    integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
   
   validate-npm-package-license@^3.0.1:
     version "3.0.3"

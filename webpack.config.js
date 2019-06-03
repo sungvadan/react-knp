@@ -27,6 +27,9 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableVersioning(Encore.isProduction())
     .enableReactPreset()
+    .configureBabel((babelConfig) => {
+      // babelConfig.plugins.push("@babel/plugin-proposal-object-rest-spread")
+    })
 ;
 
 // export the final configuration
