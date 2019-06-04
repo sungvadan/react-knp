@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @IsGranted("ROLE_USER")
+ * @Route(defaults={"_is_api": true})
  */
 class RepLogController extends BaseController
 {

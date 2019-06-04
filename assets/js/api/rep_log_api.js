@@ -16,7 +16,10 @@ export function getRepLogs() {
 
 export function deleteRepLog(id) {
   return fetchJson(`/reps/${id}`,{
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
   })
 }
 
