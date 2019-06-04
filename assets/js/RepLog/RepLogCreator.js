@@ -13,14 +13,6 @@ export default class RepLogCreator extends Component{
     this.quantityInput = React.createRef();
     this.itemSelect = React.createRef();
 
-    this.itemOptions = [
-      {id: 'cat', text: 'Cat'},
-      {id: 'fat_cat', text: 'Big Fat Cat'},
-      {id: 'laptop', text: 'My Laptop'},
-      {id: 'coffee_cup', text: 'Coffee cup'},
-      {id: 'invalid_choice', text: 'invalid choice'},
-    ];
-
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
@@ -53,7 +45,7 @@ export default class RepLogCreator extends Component{
 
   render() {
     const { quantityInputError } = this.state;
-    const { newRepLogValidationErrorMessage } = this.props;
+    const { newRepLogValidationErrorMessage, itemOptions } = this.props;
 
     return (
       <form onSubmit={(event)=>this.handleFormSubmit(event)}>
@@ -71,7 +63,7 @@ export default class RepLogCreator extends Component{
                   required="required"
                   className="form-control">
             <option value="">What did you lift?</option>
-            {this.itemOptions.map(option => {
+            {itemOptions.map(option => {
               return <option value={option.id} key={option.id}>{option.text}</option>
             })}
           </select>
@@ -96,5 +88,6 @@ export default class RepLogCreator extends Component{
 
 RepLogCreator.propTypes = {
   onNewItemSubmit: PropTypes.func.isRequired,
-  newRepLogValidationErrorMessage: PropTypes.func.isRequired
+  newRepLogValidationErrorMessage: PropTypes.func.isRequired,
+  itemOptions: PropTypes.string
 };
